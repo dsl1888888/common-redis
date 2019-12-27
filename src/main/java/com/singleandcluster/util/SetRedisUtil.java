@@ -111,7 +111,7 @@ public class SetRedisUtil
      * @param value
      * @return
      */
-    public boolean set(final String key, final Object value,double score)
+    public boolean add(final String key, final Object value,double score)
     {
         Object result = 0;
         result = redisTemplate.execute(new SessionCallback<Object>()
