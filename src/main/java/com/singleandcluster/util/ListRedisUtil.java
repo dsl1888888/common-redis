@@ -132,6 +132,66 @@ public class ListRedisUtil
         return result;
     }
 
+    public List<Object> pageCache(final String tv,   int page,  int rows)
+    {
+
+        List<Object> result = (List<Object>) redisTemplate.execute(new SessionCallback<Object>()
+        {
+            @Override
+            public Object execute(RedisOperations operations)
+            {
+                try
+                {
+                    ListOperations<String, Object> listOper = operations.opsForList();
+                    
+                    int start=0;
+                    int end=0;
+                    
+                    if (page<0  || rows<0 )
+                    {
+                        //默认 第一页            10条
+                        //1 页
+                        start=  (1-1)*10;   
+                        end=start-1+10;
+                    }else {
+                        
+                        //2 页
+                        start=  (page-1)*rows;   
+                        end=start-1+rows;
+                        
+//                      //1 页
+//                        start=  (1-1)*2;   
+//                        end=start-1+rows;
+//                        
+//                        //2 页
+//                        start=  (2-1)*2;   
+//                        end=start-1+rows;
+//                        
+//                        //3 页
+//                        start=  (3-1)*2;   
+//                        end=start-1+rows;
+//                        
+//                      //4 页
+//                        start=  (4-1)*2;   
+//                        end=start-1+rows;
+                      
+                         
+                    }
+                    List<Object> list = listOper.range(tv, start ,  end);
+ 
+                    return list;
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                    return null;
+                }
+            }
+        });
+
+        return result;
+    }
+    
     // lrange key start end // 从左边依次返回key的[start,end] 的所有值，注意返回结果包含两端的值。
     //
     // ltrim key start end //删除指定索引之外的所有元素，注意删除之后保留的元素包含两端的start和end索引值。
