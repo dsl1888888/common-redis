@@ -162,6 +162,57 @@ public final class StringRedisUtil
     }
 
     /**
+     * 2020/8/11 星期二
+     * @param key
+     * @param incrementvalue
+     * @return
+     */
+    public boolean increment(final String key, final long incrementvalue)
+    {
+        //		boolean result = false;
+        //		try {
+        //			ValueOperations<String, Object> operations = redisTemplate
+        //					.opsForValue();
+        //			operations.set(key, value);
+        //			result = true;
+        //		} catch (Exception e) {
+        //			e.printStackTrace();
+        //		}
+        //		return result;
+        Object result = 0;
+        result = redisTemplate.execute(new SessionCallback<Object>()
+        {
+            @Override
+            public Object execute(RedisOperations operations)
+            {
+                try
+                {
+                    ValueOperations<String, Object> stringRedis = operations.opsForValue();
+                    
+                    stringRedis.increment(key, incrementvalue);
+                    return 1;
+
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                    return 0;
+
+                }
+            }
+        });
+        if (1 == (Integer) result)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+    }
+    
+    /**
      *   
      * 
      * @param key,

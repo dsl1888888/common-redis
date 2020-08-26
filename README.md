@@ -10,3 +10,7 @@
 #SetRedisUtil.java
 #SortedSetRedisUtil.java
 #StringRedisUtil.java
+
+
+
+#最近加了个方法，  可以直接获取 hash 里面所有  key & value 的方法

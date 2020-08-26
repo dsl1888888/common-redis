@@ -348,6 +348,13 @@ public class HashRedisUtil
         HashOperations<String, Object, Object> hashOper = redisTemplate.opsForHash();
         return hashOper.values(tv);
     }
+    
+    public Map entries(String tv)
+    {
+        HashOperations<String, Object, Object> hashOper = redisTemplate.opsForHash();
+        
+        return hashOper.entries(tv); 
+    }
 
     /**
      * 批量写入缓存
