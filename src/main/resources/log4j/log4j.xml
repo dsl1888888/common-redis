@@ -81,7 +81,7 @@
 	
 	<!--  root部分定义了log4j的默认输出级别和方式 -->
 	<root>
-		<level value="DEBUG" /><!-- 所有logger的缺省级别 -->
+		<level value="INFO" /><!-- 所有logger的缺省级别 -->
 		<appender-ref ref="FILE-DEBUG" />
 		<appender-ref ref="FILE-INFO" />
 		<appender-ref ref="FILE-WARN" />
